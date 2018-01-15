@@ -1,6 +1,22 @@
 import React from "react"
+import PropTypes from 'prop-types'
 
 export class Home extends React.Component {
+
+    constructor(props) {
+        super()
+        this.state = {
+            age: props.initialAge,
+            status: 0
+        }
+    }
+
+    onMakeOlder() {
+        this.setState({
+            age: this.state.age += 3
+        })
+    }
+
     render() {
         let content = ""
         if (true) {
@@ -9,17 +25,9 @@ export class Home extends React.Component {
         return (
             <div>
                 <p>In a new component</p>
-                <p>Your name is {this.props.name}</p>
-                <p>User object => {this.props.user.name}</p>
-                <div>
-                    <h4>Hobbies</h4>
-                    <ul>
-{/*     This doesn't gets an error Cannot read property 'fn' of undefined */ }                   
-{this.props.user.hobbies.map((hobby) => <li key={hobby.id}>{hobby.name}</li>) }                
- { /* This gets a warning about keys not being unique */}
-{/*                         { this.props.user.hobbies.map((hobby) => <li>{hobby.name}</li>)}     */}
-                    </ul>
-                </div>
+                <p>Your name is {this.props.name} and age is {this.state.age}</p>
+                <hr/>
+                <button onClick={() => this.onMakeOlder()} className="btn btn-primary">Make me older</button>
             </div>
         )
     }
